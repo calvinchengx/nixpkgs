@@ -201,7 +201,7 @@ self: super: {
   quadratic-irrational = dontDistribute super.quadratic-irrational;
 
   # https://github.com/kazu-yamamoto/ghc-mod/issues/437
-  ghc-mod = markBroken super.ghc-mod;
+  # ghc-mod = markBroken super.ghc-mod;
   HaRe = dontDistribute super.HaRe;
   ghc-imported-from = dontDistribute super.ghc-imported-from;
   git-vogue = dontDistribute super.git-vogue;
