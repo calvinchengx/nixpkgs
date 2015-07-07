@@ -225,22 +225,14 @@ in
         # Wait for PostgreSQL to be ready to accept connections.
         postStart =
           ''
-<<<<<<< HEAD
-            while ! psql --port=${toString cfg.port} postgres -c "" 2> /dev/null; do
-=======
             while ! su -s ${pkgs.stdenv.shell} postgres -c 'psql postgres -c ""' 2> /dev/null; do
->>>>>>> c66be63... postgresql: properly fix permissions issue by in postStart
                 if ! kill -0 "$MAINPID"; then exit 1; fi
                 sleep 0.1
             done
 
             if test -e "${cfg.dataDir}/.first_startup"; then
               ${optionalString (cfg.initialScript != null) ''
-<<<<<<< HEAD
-                cat "${cfg.initialScript}" | psql --port=${toString cfg.port} postgres
-=======
                 cat "${cfg.initialScript}" | su -s ${pkgs.stdenv.shell} postgres -c 'psql postgres'
->>>>>>> c66be63... postgresql: properly fix permissions issue by in postStart
               ''}
               rm -f "${cfg.dataDir}/.first_startup"
             fi
